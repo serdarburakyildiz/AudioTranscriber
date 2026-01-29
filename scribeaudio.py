@@ -8,6 +8,8 @@ model = whisper.load_model('base')
 if __name__ == "__main__":
   #Process all audio files in the "audio" folder 
   audio_folder = "audio"
+  output_folder = "transcripts"
+  os.makedirs(output_folder, exist_ok=True)
   if not os.path.exists(audio_folder):
     print(f"Error: Folder '{audio_folder}' not found.")
   else:
@@ -19,7 +21,7 @@ if __name__ == "__main__":
         audio_path = os.path.join(audio_folder,audio_file)
         print(f'\nProcessing: {audio_file}')
         result = model.transcribe(audio_path)
-        output_file = f'{os.path.splitext(audio_file)[0]}_transcript.txt'
+        output_file = f'{output_folder}/{os.path.splitext(audio_file)[0]}_transcript.txt'
         with open(output_file,'w',encoding='utf-8') as f:
           f.write("="*80 + "\n")
           f.write(f'TMESTAMPED SEGMETNS:\n')
