@@ -1,7 +1,10 @@
 import whisper 
 import os 
+import warnings
 
-# Requires ffmpeg to be in PATH 
+# Requires ffmpeg to be in PATH
+# Suppress FP16 warning on CPU
+warnings.filterwarnings("ignore", message="FP16 is not supported on CPU") 
 
 model = whisper.load_model('base')
 
